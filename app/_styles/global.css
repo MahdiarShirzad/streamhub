@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active,
+.sidebar-link:hover {
+  background: linear-gradient(to right, #bc75fa27, transparent);
+  @apply border-l-purple-900;
+}
