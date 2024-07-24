@@ -14,7 +14,9 @@ export async function getMusics() {
 }
 
 export async function getAlbums() {
-  const { data: albums, error } = await supabase.from("albums").select("*");
+  const { data: albums, error } = await supabase
+    .from("albums")
+    .select("name, artist, id , poster , created_at");
 
   if (error) {
     console.error(error);
@@ -33,4 +35,15 @@ export async function getCharts() {
   }
 
   return charts;
+}
+
+export async function getArtists() {
+  const { data: artists, error } = await supabase.from("artist").select("*");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return artists;
 }

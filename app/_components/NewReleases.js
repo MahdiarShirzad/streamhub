@@ -20,7 +20,7 @@ export default function NewReleases({ musics }) {
   return (
     <div className="mt-16">
       <p className="text-gray-500 text-sm ">NEW TO LISTEN</p>
-      <TopTitle title="Releases" />
+      <TopTitle title="Releases" adj={"New"} />
 
       <div className="flex flex-wrap justify-between gap-8">
         {musics.slice(0, 8).map((music) => (

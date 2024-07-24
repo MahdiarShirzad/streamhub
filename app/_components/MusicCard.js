@@ -13,8 +13,10 @@ export default function MusicCard({ music, isPlaying, onPlay }) {
         />
       </div>
       <div className="ml-2 flex flex-col gap-1 w-64 items-start justify-center">
-        <p className="font-semibold">{music.name}</p>
-        <p className="text-xs text-gray-400 text-left w-full">{music.artist}</p>
+        <h1 className="font-semibold">{music.name}</h1>
+        <h4 className="text-xs text-gray-400 text-left w-full">
+          {music.artist}
+        </h4>
       </div>
       <div className="flex w-24 justify-between items-center ">
         <button>
