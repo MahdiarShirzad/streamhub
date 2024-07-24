@@ -152,7 +152,7 @@ const Sidebar = () => {
   const router = usePathname();
 
   return (
-    <div className="w-80 h-screen bg-[#1D1E22] text-white flex flex-col">
+    <div className="w-80 h-[100vh] bg-[#1D1E22] text-white flex flex-col">
       {sidebarLinks.map((link) => (
         <Link
           href={link.link}
