@@ -1,3 +1,3 @@
 export default function page() {
-  return <div className="bg-blue-700">artists</div>;
+  return <div className="pt-10 min-h-[700px]">artists</div>;
 }

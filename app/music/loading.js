@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import spinner from "../public/spinner.gif";
+import spinner from "../../public/spinner.gif";
 
 export default function Loading() {
   return (

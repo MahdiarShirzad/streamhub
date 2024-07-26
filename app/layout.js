@@ -5,6 +5,7 @@ import Sidebar from "./_components/Sidebar";
 import "../app/_styles/global.css";
 
 import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ const RootLayout = ({ children }) => {
             <div className="max-w-6xl mx-auto relative pt-24">
               <Header />
               <section>{children}</section>
+              <Footer />
             </div>
           </main>
         </div>

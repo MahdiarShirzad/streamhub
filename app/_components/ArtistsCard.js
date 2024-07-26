@@ -2,8 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 export default function ArtistsCard({ artist }) {
-  console.log(artist);
-
   return (
     <div className="text-white">
       <div className=" relative w-32 h-32">

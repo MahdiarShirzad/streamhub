@@ -1,9 +1,10 @@
 import { supabase } from "./supabase";
 
-export async function getMusics() {
+export async function getMusics(limit = 20, offset = 0) {
   const { data: musics, error } = await supabase
     .from("musics")
-    .select("id, created_at, name, link, artist, album, poster, chart");
+    .select("id, created_at, name, link, artist, album, poster, chart")
+    .range(offset, offset + limit - 1);
 
   if (error) {
     console.error("Error fetching musics:", error);

@@ -3,8 +3,6 @@ import TopTitle from "./TopTitle";
 import AlbumCard from "./AlbumCard";
 
 export default function TopAlbums({ albums }) {
-  console.log(albums);
-
   return (
     <div className=" mt-12">
       <p className="text-gray-500 text-sm ">Trending to listen</p>
