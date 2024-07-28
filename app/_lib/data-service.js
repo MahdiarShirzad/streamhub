@@ -92,6 +92,5 @@ export async function getArtists(sort = "default") {
     return [];
   }
 
-  console.log(artists);
   return artists;
 }

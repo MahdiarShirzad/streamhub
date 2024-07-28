@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../_components/Logo";
+import LogoIcon from "../_components/LogoIcon";
 
 const sidebarLinks = [
   {
@@ -150,11 +151,30 @@ const sidebarLinks = [
 ];
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const router = usePathname();
 
   return (
-    <div className="w-80 h-[100vh] bg-[#050616] text-white flex flex-col">
-      <Logo />
+    <div
+      className={`h-[100vh] bg-[#050616] text-white flex flex-col pt-5 transition-all duration-300 ${
+        isCollapsed ? "w-28" : "w-96"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-8">
+        {isCollapsed ? <LogoIcon /> : <Logo />}
+        <button onClick={() => setIsCollapsed(!isCollapsed)}>
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            className="remixicon sidebar-menu-1"
+          >
+            <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
+          </svg>
+        </button>
+      </div>
       {sidebarLinks.map((link) => (
         <Link
           href={link.link}
@@ -164,7 +184,7 @@ const Sidebar = () => {
           }`}
         >
           {link.icon}
-          <p className="ml-2">{link.label}</p>
+          {!isCollapsed && <p className="ml-2">{link.label}</p>}
         </Link>
       ))}
     </div>
