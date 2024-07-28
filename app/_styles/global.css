@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 body {
-  background-color: #1d1e22;
+  @apply bg-[#050616];
 }
 
 .active,
 .sidebar-link:hover {
-  background: linear-gradient(to right, #bc75fa27, transparent);
-  @apply border-l-purple-900;
+  background: linear-gradient(to right, #e2a1207c, transparent);
+  @apply border-l-golden;
 }
 .rhap_container {
   background-color: #131416 !important;
   max-width: 1100px;
-  border-top: 1px solid #9333ea;
+  @apply border-t-golden;
   border-radius: 6px;
   box-shadow: 1px 1px 1px 0 #4d4c4c !important;
   display: flexbox !important;
@@ -24,10 +24,12 @@ body {
   color: white !important;
 }
 .rhap_progress-indicator {
-  background-color: #9333ea !important;
+  background-color: #e2a020 !important;
+  /* @apply bg-golden; */
 }
 .rhap_progress-filled {
-  background-color: #9333ea !important;
+  background-color: #e2a020 !important;
+  /* @apply bg-golden; */
 }
 .iconify--mdi {
   color: white !important;

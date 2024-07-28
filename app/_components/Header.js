@@ -1,9 +1,9 @@
 export default function Header() {
   return (
-    <div className="bg-purple-600 absolute w-full top-5 flex px-7 py-4 rounded-lg items-center gap-8">
+    <div className="bg-[#e2a020] absolute w-full top-5 flex px-7 py-4 rounded-lg items-center gap-8">
       <svg
         className="w-6"
-        fill="#fff"
+        fill="#ooo"
         viewBox="0 0 96 96"
         xmlns="http://www.w3.org/2000/svg"
         transform="matrix(-1, 0, 0, 1, 0, 0)"
@@ -20,7 +20,7 @@ export default function Header() {
         </g>
       </svg>
       <input
-        className="bg-transparent w-full focus:outline-none text-white placeholder:text-gray-100 text-sm"
+        className="bg-transparent w-full focus:outline-none  placeholder:text-black text-sm"
         placeholder="Type anything to get result..."
       />
       <div>mahdiar</div>

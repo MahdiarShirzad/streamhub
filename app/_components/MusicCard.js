@@ -70,7 +70,7 @@ export default function MusicCard({ music, isPlaying, onPlay }) {
         </button>
         <button
           onClick={() => onPlay(music.link)}
-          className=" bg-purple-500 text-white rounded-full w-7 h-7 flex items-center justify-center p-1"
+          className=" bg-golden text-white rounded-full w-7 h-7 flex items-center justify-center p-1"
         >
           {isPlaying ? (
             <svg

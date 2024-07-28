@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "../_components/Logo";
 
 const sidebarLinks = [
   {
@@ -152,12 +153,13 @@ const Sidebar = () => {
   const router = usePathname();
 
   return (
-    <div className="w-80 h-[100vh] bg-[#1D1E22] text-white flex flex-col">
+    <div className="w-80 h-[100vh] bg-[#050616] text-white flex flex-col">
+      <Logo />
       {sidebarLinks.map((link) => (
         <Link
           href={link.link}
           key={link.label}
-          className={`sidebar-link rounded-md flex items-center mb-2 my-3 py-2 px-4 text-base border-l-4 border-l-transparent hover:border-l-4 hover:border-l-purple-900 ${
+          className={`sidebar-link rounded-md flex items-center mb-2 my-3 py-2 px-4 text-base border-l-4 border-l-transparent hover:border-l-4 hover:border-l-golden ${
             router === link.link ? "active" : ""
           }`}
         >

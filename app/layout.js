@@ -20,7 +20,7 @@ const RootLayout = ({ children }) => {
       <body>
         <div className=" flex">
           <Sidebar />
-          <main className="bg-[#131416] w-full ">
+          <main className="bg-[#00010a00] w-full ">
             <div className="max-w-6xl mx-auto relative pt-24">
               <Header />
               <section>{children}</section>

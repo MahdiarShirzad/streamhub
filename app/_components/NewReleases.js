@@ -8,11 +8,12 @@ export default function NewReleases({ musics }) {
   const [currentMusic, setCurrentMusic] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handlePlay = (link) => {
-    if (currentMusic === link) {
+  const handlePlay = (music) => {
+    if (currentMusic && currentMusic.link === music.link) {
       setIsPlaying(!isPlaying);
+      console.log(music.link);
     } else {
-      setCurrentMusic(link);
+      setCurrentMusic(music);
       setIsPlaying(true);
     }
   };
@@ -25,15 +26,17 @@ export default function NewReleases({ musics }) {
       <div className="flex flex-wrap justify-between gap-8">
         {musics.slice(0, 8).map((music) => (
           <MusicCard
-            key={music.name}
+            key={music.id}
             music={music}
-            onPlay={handlePlay}
-            isPlaying={currentMusic === music.link && isPlaying}
+            onPlay={() => handlePlay(music)}
+            isPlaying={
+              currentMusic && currentMusic.link === music.link && isPlaying
+            }
           />
         ))}
       </div>
 
-      {currentMusic && <Player src={currentMusic} />}
+      {currentMusic && <Player music={currentMusic} />}
     </div>
   );
 }

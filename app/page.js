@@ -5,6 +5,7 @@ import {
   getArtists,
   getCharts,
   getMusics,
+  getTotalMusics,
 } from "./_lib/data-service";
 import NewReleases from "./_components/NewReleases";
 import FeaturedArtists from "./_components/FeaturedArtists";
@@ -12,7 +13,7 @@ import TopAlbums from "./_components/TopAlbums";
 
 const Page = async () => {
   const charts = await getCharts();
-  const musics = await getMusics();
+  const musics = await getTotalMusics();
   const artists = await getArtists();
   const albums = await getAlbums();
 
