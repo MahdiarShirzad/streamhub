@@ -56,7 +56,6 @@ export async function getAlbums(sort = "default") {
     return [];
   }
 
-  console.log(albums);
   return albums;
 }
 
@@ -108,4 +107,58 @@ export async function getAlbumById(albumId) {
   }
 
   return album;
+}
+
+export async function getSongsByAlbum(albumName) {
+  const { data: songs, error } = await supabase
+    .from("musics")
+    .select("id, created_at, name, link, artist, album, poster, chart")
+    .eq("album", albumName);
+
+  if (error) {
+    console.error("Error fetching songs by album:", error);
+    return [];
+  }
+
+  // console.log(songs);
+  return songs;
+}
+
+export async function getArtistsByAlbum(albumName) {
+  // Fetch all musics that belong to the specified album
+  const { data: musics, error: musicError } = await supabase
+    .from("musics")
+    .select("artist")
+    .eq("album", albumName);
+
+  if (musicError) {
+    console.error("Error fetching musics for album:", musicError);
+    return [];
+  }
+
+  if (!musics || musics.length === 0) {
+    console.error("No musics found for the given album");
+    return [];
+  }
+
+  // Extract unique artists from the musics data
+  const uniqueArtists = [...new Set(musics.map((music) => music.artist))];
+
+  // Fetch artist details based on unique artist names
+  const { data: artists, error: artistError } = await supabase
+    .from("artist")
+    .select("*")
+    .in("name", uniqueArtists);
+
+  if (artistError) {
+    console.error("Error fetching artists:", artistError);
+    return [];
+  }
+
+  if (!artists || artists.length === 0) {
+    console.error("No artists found for the given album");
+    return [];
+  }
+
+  return artists;
 }

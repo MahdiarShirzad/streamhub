@@ -1,23 +1,34 @@
-// _components/AlbumDetail.js
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import AlbumsMusics from "./AlbumsMusics";
+import Link from "next/link";
 
-export default function AlbumDetail({ album }) {
+export default function AlbumDetail({ album, songs, artist }) {
+  const artistId = Array.isArray(artist) ? artist[0].id : artist.id;
+
   return (
     <div className="pt-8 min-h-[700px]">
-      <h1 className="text-golden text-3xl font-bold">{album.name}</h1>
-      <p className="text-gray-300 mt-3 mb-8 text-lg">{album.artist}</p>
-      <div className="relative h-64 w-64">
-        <Image
-          className="rounded-xl"
-          src={album.poster}
-          alt={album.name}
-          fill
-        />
+      <div className="flex items-start gap-20">
+        <div className="relative h-64 w-64">
+          <Image
+            className="rounded-xl"
+            src={album.poster}
+            alt={album.name}
+            fill
+          />
+        </div>
+        <div>
+          <h1 className="text-golden text-4xl font-extrabold">{album.name}</h1>
+          <Link
+            href={`artists/${artistId}`}
+            className="text-gray-300 mt-3 block text-lg hover:underline"
+          >
+            {album.artist}
+          </Link>
+        </div>
       </div>
-      {/* Display more album details as needed */}
+      <AlbumsMusics songs={songs} />
     </div>
   );
 }
