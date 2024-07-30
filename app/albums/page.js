@@ -14,6 +14,11 @@ const Page = async ({ searchParams }) => {
 
   return (
     <div className="pt-8 min-h-[700px]">
+      <p className="text-golden text-3xl font-bold">Must-Listen Albums</p>
+      <p className=" text-gray-300 mt-3 mb-8 text-lg">
+        Discover the albums that are topping the charts right now
+      </p>
+
       <SortBar
         totalItems={albums.length}
         initialSort={sort}

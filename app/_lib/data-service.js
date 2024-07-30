@@ -94,3 +94,18 @@ export async function getArtists(sort = "default") {
 
   return artists;
 }
+
+export async function getAlbumById(albumId) {
+  const { data: album, error } = await supabase
+    .from("albums")
+    .select("*")
+    .eq("id", albumId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching album:", error);
+    return null;
+  }
+
+  return album;
+}

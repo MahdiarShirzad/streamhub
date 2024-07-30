@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React from "react";
-
 import spinner from "../../public/spinner.gif";
 
-export default function Loading() {
+export default function Spinner() {
   return (
     <div className="flex items-center justify-center gap-1 w-full">
       <p className="text-white">loading ...</p>

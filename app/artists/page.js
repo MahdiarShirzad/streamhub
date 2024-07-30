@@ -14,6 +14,11 @@ const Page = async ({ searchParams }) => {
 
   return (
     <div className="pt-10 min-h-[700px]">
+      <p className="text-golden text-3xl font-bold">Artist Spotlight</p>
+      <p className=" text-gray-300 mt-3 mb-8 text-lg">
+        Uncover new talent and explore diverse musical styles
+      </p>
+
       <SortBar
         totalItems={artists.length}
         initialSort={sort}
