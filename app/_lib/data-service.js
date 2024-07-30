@@ -231,3 +231,17 @@ export async function getAlbumsByArtist(artistName) {
 
   return albums;
 }
+
+export async function searchMusics(query) {
+  const { data: musics, error } = await supabase
+    .from("musics")
+    .select("id, created_at, name, link, artist, album, poster, chart")
+    .ilike("name", `%${query}%`);
+
+  if (error) {
+    console.error("Error searching musics:", error);
+    return [];
+  }
+
+  return musics;
+}

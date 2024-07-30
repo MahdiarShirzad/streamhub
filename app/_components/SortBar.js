@@ -3,14 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SortBar = ({ totalItems, initialSort, options, items }) => {
+const SortBar = ({ totalItems, initialSort, options, items, searchQuery }) => {
   const router = useRouter();
   const [sortOption, setSortOption] = useState(initialSort);
 
   const handleSortChange = (event) => {
     const newSort = event.target.value;
     setSortOption(newSort);
-    router.push(`?sort=${newSort}`);
+    router.push(`?search=${searchQuery}&sort=${newSort}`);
   };
 
   return (

@@ -1,30 +1,65 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import MusicCard from "./MusicCard";
 import Player from "./Player";
-import { getMusics } from "../_lib/data-service";
-import { useRouter, useSearchParams } from "next/navigation";
+import { getMusics, searchMusics } from "../_lib/data-service";
+import { useSearchParams } from "next/navigation";
 
-export default function MusicSection({ initialMusics, initialSort }) {
+export default function MusicSection({
+  initialMusics,
+  initialSort,
+  searchQuery,
+}) {
   const [musics, setMusics] = useState(initialMusics);
   const [currentMusic, setCurrentMusic] = useState(null);
   const [hasMore, setHasMore] = useState(initialMusics.length === 20);
   const [offset, setOffset] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [sortedMusics, setSortedMusics] = useState(initialMusics);
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort") || initialSort;
 
   useEffect(() => {
     const fetchMusics = async () => {
-      const newMusics = await getMusics(20, 0, sort);
+      let newMusics = [];
+      if (searchQuery) {
+        newMusics = await searchMusics(searchQuery);
+      } else {
+        newMusics = await getMusics(20, 0, sort);
+      }
       setMusics(newMusics);
       setHasMore(newMusics.length === 20);
       setOffset(20);
     };
 
     fetchMusics();
-  }, [sort]);
+  }, [sort, searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const fetchSearchResults = async () => {
+        const newMusics = await searchMusics(searchQuery);
+        setMusics(newMusics);
+      };
+
+      fetchSearchResults();
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const applySorting = (musicsList) => {
+      if (sort === "default") return musicsList;
+      if (sort === "A - Z")
+        return [...musicsList].sort((a, b) => a.name.localeCompare(b.name));
+      if (sort === "Z - A")
+        return [...musicsList].sort((a, b) => b.name.localeCompare(a.name));
+      return musicsList;
+    };
+
+    setSortedMusics(applySorting(musics));
+  }, [musics, sort]);
 
   const handlePlay = (music) => {
     if (currentMusic && currentMusic.link === music.link) {
@@ -37,7 +72,12 @@ export default function MusicSection({ initialMusics, initialSort }) {
 
   const loadMoreMusics = async () => {
     setIsLoading(true);
-    const moreMusics = await getMusics(20, offset, sort);
+    let moreMusics = [];
+    if (searchQuery) {
+      moreMusics = await searchMusics(searchQuery);
+    } else {
+      moreMusics = await getMusics(20, offset, sort);
+    }
 
     if (moreMusics.length < 20) {
       setHasMore(false);
@@ -51,7 +91,7 @@ export default function MusicSection({ initialMusics, initialSort }) {
   return (
     <div>
       <div className="flex flex-wrap justify-between gap-8">
-        {musics.map((music) => (
+        {sortedMusics.map((music) => (
           <MusicCard
             key={music.id}
             music={music}
@@ -63,10 +103,10 @@ export default function MusicSection({ initialMusics, initialSort }) {
         ))}
       </div>
 
-      {hasMore && musics.length > 0 && (
+      {hasMore && sortedMusics.length > 0 && (
         <button
           onClick={loadMoreMusics}
-          className={`load-more-button w-32  bg-golden flex items-center py-3 justify-center rounded-lg mx-auto gap-1 mt-6 text-center ${
+          className={`load-more-button w-32 bg-golden flex items-center py-3 justify-center rounded-lg mx-auto gap-1 mt-6 text-center ${
             isLoading ? "cursor-not-allowed" : ""
           }`}
           disabled={isLoading}
