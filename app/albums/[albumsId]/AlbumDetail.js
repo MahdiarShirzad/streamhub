@@ -21,7 +21,7 @@ export default function AlbumDetail({ album, songs, artist }) {
         <div>
           <h1 className="text-golden text-4xl font-extrabold">{album.name}</h1>
           <Link
-            href={`artists/${artistId}`}
+            href={`/artists/${artistId}`}
             className="text-gray-300 mt-3 block text-lg hover:underline"
           >
             {album.artist}

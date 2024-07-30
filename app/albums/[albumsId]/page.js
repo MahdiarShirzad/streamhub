@@ -1,4 +1,3 @@
-// [albumsId]/page.js
 import {
   getAlbumById,
   getArtistsByAlbum,

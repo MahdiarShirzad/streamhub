@@ -109,6 +109,21 @@ export async function getAlbumById(albumId) {
   return album;
 }
 
+export async function getArtistById(artistId) {
+  const { data: artist, error } = await supabase
+    .from("artist")
+    .select("*")
+    .eq("id", artistId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching artist:", error);
+    return null;
+  }
+
+  return artist;
+}
+
 export async function getSongsByAlbum(albumName) {
   const { data: songs, error } = await supabase
     .from("musics")
@@ -125,7 +140,6 @@ export async function getSongsByAlbum(albumName) {
 }
 
 export async function getArtistsByAlbum(albumName) {
-  // Fetch all musics that belong to the specified album
   const { data: musics, error: musicError } = await supabase
     .from("musics")
     .select("artist")
@@ -141,10 +155,8 @@ export async function getArtistsByAlbum(albumName) {
     return [];
   }
 
-  // Extract unique artists from the musics data
   const uniqueArtists = [...new Set(musics.map((music) => music.artist))];
 
-  // Fetch artist details based on unique artist names
   const { data: artists, error: artistError } = await supabase
     .from("artist")
     .select("*")
@@ -161,4 +173,32 @@ export async function getArtistsByAlbum(albumName) {
   }
 
   return artists;
+}
+
+export async function getMusicsByArtist(artistName) {
+  const { data: musics, error: musicError } = await supabase
+    .from("musics")
+    .select("*")
+    .eq("artist", artistName);
+
+  if (musicError) {
+    console.error(musicError);
+    return null;
+  }
+
+  return musics;
+}
+
+export async function getAlbumsByArtist(artistName) {
+  const { data: albums, error: musicError } = await supabase
+    .from("albums")
+    .select("*")
+    .eq("artist", artistName);
+
+  if (musicError) {
+    console.error(musicError);
+    return null;
+  }
+
+  return albums;
 }

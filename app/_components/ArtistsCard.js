@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function ArtistsCard({ artist }) {
   return (
-    <div className="text-white">
-      <div className=" relative w-32 h-32">
+    <Link href={`/artists/${artist.id}`} className="text-white">
+      <div className="relative w-32 h-32">
         <Image
           className="rounded-full"
           fill
@@ -12,7 +13,7 @@ export default function ArtistsCard({ artist }) {
           alt={artist.name}
         />
       </div>
-      <h3 className=" text-center mt-3 text-xl font-bold">{artist.name}</h3>
-    </div>
+      <h3 className="text-center mt-3 text-xl font-bold">{artist.name}</h3>
+    </Link>
   );
 }
