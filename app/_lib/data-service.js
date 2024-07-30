@@ -124,6 +124,35 @@ export async function getArtistById(artistId) {
   return artist;
 }
 
+export async function getChartsById(chartsId) {
+  const { data: chart, error } = await supabase
+    .from("charts")
+    .select("*")
+    .eq("id", chartsId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return chart;
+}
+
+export async function getMusicsByCharts(chartName) {
+  const { data: musics, error } = await supabase
+    .from("musics")
+    .select("id, created_at, name, link, artist, album, poster, chart")
+    .eq("chart", chartName);
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return musics;
+}
+
 export async function getSongsByAlbum(albumName) {
   const { data: songs, error } = await supabase
     .from("musics")
