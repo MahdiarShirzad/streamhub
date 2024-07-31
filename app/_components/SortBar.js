@@ -1,16 +1,21 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-const SortBar = ({ totalItems, initialSort, options, items, searchQuery }) => {
+const SortBar = ({ totalItems, initialSort, options, items }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [sortOption, setSortOption] = useState(initialSort);
+  const searchQuery = searchParams.get("search") || "";
 
   const handleSortChange = (event) => {
     const newSort = event.target.value;
     setSortOption(newSort);
-    router.push(`?search=${searchQuery}&sort=${newSort}`);
+    const query = searchQuery
+      ? `search=${searchQuery}&sort=${newSort}`
+      : `sort=${newSort}`;
+    router.push(`?${query}`);
   };
 
   return (

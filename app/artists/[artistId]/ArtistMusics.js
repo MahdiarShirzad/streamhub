@@ -23,22 +23,26 @@ export default function ArtistMusics({ musics }) {
   }
 
   return (
-    <div className="mt-20">
-      <p className=" text-golden text-2xl font-bold">Artist{`'`}s Musics</p>
-      <div className="flex flex-wrap justify-between gap-8 mt-5">
-        {musics.map((music) => (
-          <MusicCard
-            key={music.id}
-            music={music}
-            onPlay={() => handlePlay(music)}
-            isPlaying={
-              currentMusic && currentMusic.link === music.link && isPlaying
-            }
-          />
-        ))}
+    <>
+      {musics && musics.length > 0 && (
+        <div className="mt-20">
+          <p className=" text-golden text-2xl font-bold">Artist{`'`}s Musics</p>
+          <div className="flex flex-wrap justify-between gap-8 mt-5">
+            {musics.map((music) => (
+              <MusicCard
+                key={music.id}
+                music={music}
+                onPlay={() => handlePlay(music)}
+                isPlaying={
+                  currentMusic && currentMusic.link === music.link && isPlaying
+                }
+              />
+            ))}
 
-        {currentMusic && <Player music={currentMusic} />}
-      </div>
-    </div>
+            {currentMusic && <Player music={currentMusic} />}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import MusicCard from "./MusicCard";
 import Player from "./Player";
 import { getMusics, searchMusics } from "../_lib/data-service";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function MusicSection({
   initialMusics,
@@ -19,13 +19,15 @@ export default function MusicSection({
   const [isPlaying, setIsPlaying] = useState(false);
   const [sortedMusics, setSortedMusics] = useState(initialMusics);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const sort = searchParams.get("sort") || initialSort;
+  const search = searchParams.get("search");
 
   useEffect(() => {
     const fetchMusics = async () => {
       let newMusics = [];
-      if (searchQuery) {
-        newMusics = await searchMusics(searchQuery);
+      if (search) {
+        newMusics = await searchMusics(search);
       } else {
         newMusics = await getMusics(20, 0, sort);
       }
@@ -35,18 +37,7 @@ export default function MusicSection({
     };
 
     fetchMusics();
-  }, [sort, searchQuery]);
-
-  useEffect(() => {
-    if (searchQuery) {
-      const fetchSearchResults = async () => {
-        const newMusics = await searchMusics(searchQuery);
-        setMusics(newMusics);
-      };
-
-      fetchSearchResults();
-    }
-  }, [searchQuery]);
+  }, [search]);
 
   useEffect(() => {
     const applySorting = (musicsList) => {
@@ -73,8 +64,8 @@ export default function MusicSection({
   const loadMoreMusics = async () => {
     setIsLoading(true);
     let moreMusics = [];
-    if (searchQuery) {
-      moreMusics = await searchMusics(searchQuery);
+    if (search) {
+      moreMusics = await searchMusics(search);
     } else {
       moreMusics = await getMusics(20, offset, sort);
     }
