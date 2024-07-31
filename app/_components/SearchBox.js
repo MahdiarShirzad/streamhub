@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { searchMusics } from "../_lib/data-service";
+import ResultCard from "./ResultCard";
 
 export default function SearchBox() {
   const [query, setQuery] = useState("");
@@ -24,7 +25,8 @@ export default function SearchBox() {
   const handleSearch = () => {
     if (query.trim()) {
       router.push(`/music?search=${query}`);
-      setQuery(""); // Clear the input field after searching
+      setQuery("");
+      setResults([]);
     }
   };
 
@@ -34,8 +36,14 @@ export default function SearchBox() {
     }
   };
 
+  const handleResultClick = (musicName) => {
+    router.push(`/music?search=${musicName}`);
+    setQuery("");
+    setResults([]);
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <div className="flex items-center gap-10">
         <button onClick={handleSearch} className="ml-2">
           <svg
@@ -66,11 +74,13 @@ export default function SearchBox() {
         />
       </div>
       {results.length > 0 && (
-        <ul className="bg-white text-black mt-2 rounded-lg shadow-lg">
+        <ul className="bg-golden absolute w-full top-10 z-40 text-black mt-2 rounded-lg shadow-lg">
           {results.map((music) => (
-            <li key={music.id} className="p-2 border-b last:border-b-0">
-              {music.name} - {music.artist}
-            </li>
+            <ResultCard
+              key={music.id}
+              music={music}
+              onClick={() => handleResultClick(music.name)}
+            />
           ))}
         </ul>
       )}
