@@ -21,8 +21,8 @@ export default function AlbumSection({ initialAlbums, initialSort }) {
   }, [sort]);
 
   return (
-    <div>
-      <div className="flex justify-start  gap-28 px-4">
+    <div className="w-full">
+      <div className="albums-section grid justify-center  gap-10 px-4">
         {albums &&
           albums.length > 0 &&
           albums.map((album) => <AlbumCard album={album} key={album.id} />)}

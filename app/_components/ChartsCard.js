@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ChartsCard({ chart }) {
   return (
-    <Link href={`/charts/${chart.id}`} className="group w-52 px-5">
+    <Link href={`/charts/${chart.id}`} className="group w-full px-5">
       <div className="w-full relative h-32 overflow-hidden transition-transform duration-300 ease-in-out group-hover:-translate-y-1">
         <Image
           className="rounded-lg "

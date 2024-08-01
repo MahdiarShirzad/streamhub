@@ -3,7 +3,7 @@ import React from "react";
 
 export default function MusicCard({ music, isPlaying, onPlay }) {
   return (
-    <div className="flex text-gray-200 justify-between items-center shadow-sm shadow-gray-800 w-[30rem] px-2 py-1 rounded-lg">
+    <div className="flex text-gray-200 justify-between items-center shadow-sm shadow-gray-800 w-full px-2 py-1 rounded-lg">
       <div className="relative h-16 w-16">
         <Image
           fill

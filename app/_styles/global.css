@@ -37,3 +37,23 @@ body {
 .rhap_volume-indicator {
   background-color: #fff !important;
 }
+
+.featured-artists,
+.artist-section {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.top-albums,
+.albums-section {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.charts-section,
+.music-section,
+.new-releases {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.top-charts {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}

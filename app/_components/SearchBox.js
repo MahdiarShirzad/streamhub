@@ -44,7 +44,7 @@ export default function SearchBox() {
 
   return (
     <div className="w-full relative">
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-10 max-sm:gap-3">
         <button onClick={handleSearch} className="ml-2">
           <svg
             className="w-6"
@@ -67,7 +67,7 @@ export default function SearchBox() {
         </button>
         <input
           className="bg-transparent w-full focus:outline-none placeholder:text-black text-sm"
-          placeholder="Type anything to get result..."
+          placeholder="Type anything..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}

@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Logo from "../_components/Logo";
-import LogoIcon from "../_components/LogoIcon";
+import React, { useState } from "react";
+import LogoIcon from "./LogoIcon";
 
 const sidebarLinks = [
   {
@@ -150,45 +150,79 @@ const sidebarLinks = [
   },
 ];
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+export default function MobileSidebar() {
+  const [isShown, setIsShown] = useState(false);
   const router = usePathname();
 
+  const toggleHandler = () => {
+    setIsShown(!isShown);
+  };
+
   return (
-    <div
-      className={`h-[100vh] max-lg:hidden bg-[#050616] text-white flex flex-col pt-5 transition-all duration-300 ${
-        isCollapsed ? "w-28" : "w-96"
-      }`}
-    >
-      <div className="flex items-center justify-between gap-8">
-        {isCollapsed ? <LogoIcon /> : <Logo />}
-        <button onClick={() => setIsCollapsed(!isCollapsed)}>
-          <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            className="remixicon sidebar-menu-1"
-          >
-            <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
-          </svg>
-        </button>
-      </div>
-      {sidebarLinks.map((link) => (
-        <Link
-          href={link.link}
-          key={link.label}
-          className={`sidebar-link rounded-md flex items-center mb-2 my-3 py-2 px-4 text-base border-l-4 border-l-transparent hover:border-l-4 hover:border-l-golden ${
-            router === link.link ? "active" : ""
-          }`}
+    <div className="relative lg:hidden">
+      <button
+        className="text-white flex lg:hidden absolute top-8 left-8 z-10"
+        onClick={toggleHandler}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="#fff"
+          className="remixicon sidebar-menu-1"
         >
-          {link.icon}
-          {!isCollapsed && <p className="ml-2">{link.label}</p>}
-        </Link>
-      ))}
+          <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
+        </svg>
+      </button>
+
+      <div
+        className={`absolute  pr-3 z-50 bg-[#050616] transition-width duration-300 ease-in-out ${
+          isShown ? "w-44" : "w-0"
+        } top-0 h-full overflow-hidden`}
+      >
+        <div
+          onClick={toggleHandler}
+          className=" mt-6 mb-8 flex justify-between px-5 cursor-pointer"
+        >
+          <LogoIcon />
+
+          <svg
+            className=" mt-4"
+            fill="#fff"
+            height="15px"
+            width="15px"
+            version="1.1"
+            id="Capa_1"
+            // xmlns="http://www.w3.org/2000/svg"
+            // xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 460.775 460.775"
+            // xml:space="preserve"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path>{" "}
+            </g>
+          </svg>
+        </div>
+        {sidebarLinks.map((link) => (
+          <Link
+            onClick={toggleHandler}
+            href={link.link}
+            key={link.label}
+            className={`sidebar-link rounded-md flex items-center mb-2 my-3 py-2 px-4 text-base border-l-4 border-l-transparent hover:border-l-4 hover:border-l-golden `}
+          >
+            {link.icon}
+            <p className="ml-2 text-white">{link.label}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default Sidebar;
+}

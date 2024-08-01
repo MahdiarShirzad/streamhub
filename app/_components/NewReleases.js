@@ -23,7 +23,7 @@ export default function NewReleases({ musics }) {
       <p className="text-gray-500 text-sm ">NEW TO LISTEN</p>
       <TopTitle title="Releases" adj={"New"} />
 
-      <div className="flex flex-wrap justify-between gap-8">
+      <div className="new-releases grid justify-center lg:gap-8 max-lg:gap-y-10">
         {musics.slice(0, 8).map((music) => (
           <MusicCard
             key={music.id}

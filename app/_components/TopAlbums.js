@@ -7,7 +7,7 @@ export default function TopAlbums({ albums }) {
     <div className=" mt-12">
       <p className="text-gray-500 text-sm ">Trending to listen</p>
       <TopTitle title="Albums" adj={"Top"} />
-      <div className=" flex justify-between">
+      <div className=" top-albums grid justify-center max-lg:gap-y-10">
         {albums.map((album) => (
           <AlbumCard album={album} key={album.id} />
         ))}

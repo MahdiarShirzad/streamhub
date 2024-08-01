@@ -4,6 +4,7 @@ import Sidebar from "./_components/Sidebar";
 
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
+import MobileSidebar from "./_components/MobileSidebar";
 
 import "../app/_styles/global.css";
 const inter = Inter({ subsets: ["latin"] });
@@ -18,11 +19,13 @@ const RootLayout = ({ children }) => {
     <html lang="en">
       <body>
         <div className=" flex">
+          <MobileSidebar />
+
           <Sidebar />
-          <main className="bg-[#00010a00] w-full ">
+          <main className="bg-[#00010a00] w-full max-lg:px-10 ">
             <div className="max-w-6xl mx-auto relative pt-24">
               <Header />
-              <section>{children}</section>
+              <section className="max-lg:px-4">{children}</section>
               <Footer />
             </div>
           </main>

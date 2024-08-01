@@ -7,7 +7,7 @@ export default function TopCharts({ charts }) {
     <div className="pt-6">
       <p className="text-gray-500 text-sm ">LISTEN TOP CHARTS</p>
       <TopTitle title="Charts" adj={"Top"} />
-      <div className="flex gap-5 justify-between mt-3">
+      <div className="top-charts grid justify-center gap-12 mt-3">
         {charts.map((chart) => (
           <ChartsCard key={chart.id} chart={chart} />
         ))}

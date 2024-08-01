@@ -21,7 +21,7 @@ export default function ArtistsSection({ initialArtists, initialSort }) {
 
   return (
     <div>
-      <div className="flex justify-start flex-wrap gap-36 px-4">
+      <div className="artist-section px-4 justify-center grid gap-12	gap-y-20 ">
         {artists.map((artist) => (
           <ArtistsCard artist={artist} key={artist.id} />
         ))}

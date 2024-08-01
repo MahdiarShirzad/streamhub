@@ -4,10 +4,10 @@ import React from "react";
 
 export default function ArtistsCard({ artist }) {
   return (
-    <Link href={`/artists/${artist.id}`} className="group text-white">
-      <div className="relative w-32 h-32 overflow-hidden rounded-full">
+    <Link href={`/artists/${artist.id}`} className="group text-white block  ">
+      <div className="relative w-32 h-32 overflow-hidden mx-auto rounded-full">
         <Image
-          className="rounded-full transition-transform duration-300 ease-in-out group-hover:scale-95"
+          className="rounded-full transition-transform  duration-300 ease-in-out group-hover:scale-95"
           fill
           src={artist.image}
           alt={artist.name}
