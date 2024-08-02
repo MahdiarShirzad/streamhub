@@ -27,7 +27,7 @@ export default function ArtistMusics({ musics }) {
       {musics && musics.length > 0 && (
         <div className="mt-20">
           <p className=" text-golden text-2xl font-bold">Artist{`'`}s Musics</p>
-          <div className="flex flex-wrap justify-between gap-8 mt-5">
+          <div className="music-section grid justify-center xl:gap-20 lg:gap-12 md:gap-8 max-md:px-10 mt-8 max-md:gap-y-6">
             {musics.map((music) => (
               <MusicCard
                 key={music.id}

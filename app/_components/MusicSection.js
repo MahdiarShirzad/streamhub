@@ -5,6 +5,9 @@ import MusicCard from "./MusicCard";
 import Player from "./Player";
 import { getMusics, searchMusics } from "../_lib/data-service";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+
+import Spinner from "./Spinner";
 
 export default function MusicSection({
   initialMusics,
@@ -82,18 +85,29 @@ export default function MusicSection({
   return (
     <div>
       <div className="music-section grid justify-center xl:gap-20 lg:gap-12 md:gap-8 max-md:px-10 max-md:gap-y-6">
-        {sortedMusics.map((music) => (
-          <MusicCard
-            key={music.id}
-            music={music}
-            onPlay={() => handlePlay(music)}
-            isPlaying={
-              currentMusic && currentMusic.link === music.link && isPlaying
-            }
-          />
-        ))}
+        {sortedMusics.length > 0 &&
+          sortedMusics.map((music) => (
+            <MusicCard
+              key={music.id}
+              music={music}
+              onPlay={() => handlePlay(music)}
+              isPlaying={
+                currentMusic && currentMusic.link === music.link && isPlaying
+              }
+            />
+          ))}
       </div>
 
+      {sortedMusics.length == 0 && (
+        <div className="no-music-found w-full text-center mt-10">
+          <p className="text-white w-full text-4xl font-black mb-5">
+            No music found.
+          </p>
+          <Link href="/">
+            <p className="text-golden underline">Go to Home Page</p>
+          </Link>
+        </div>
+      )}
       {hasMore && sortedMusics.length > 0 && (
         <button
           onClick={loadMoreMusics}

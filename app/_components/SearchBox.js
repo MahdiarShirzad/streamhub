@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { searchMusics } from "../_lib/data-service";
 import ResultCard from "./ResultCard";
+import Spinner from "./Spinner";
 
 export default function SearchBox() {
   const [query, setQuery] = useState("");
