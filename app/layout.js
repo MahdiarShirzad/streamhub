@@ -6,8 +6,8 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import MobileSidebar from "./_components/MobileSidebar";
 
-import "../app/_styles/global.css";
 const inter = Inter({ subsets: ["latin"] });
+import "../app/_styles/global.css";
 
 export const metadata = {
   title: "Create Next App",
@@ -26,10 +26,10 @@ const RootLayout = ({ children }) => {
             <div className="max-w-6xl mx-auto relative pt-24">
               <Header />
               <section className="max-lg:px-4">{children}</section>
-              <Footer />
             </div>
           </main>
         </div>
+        <Footer />
       </body>
     </html>
   );

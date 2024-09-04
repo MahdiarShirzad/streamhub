@@ -1,24 +1,12 @@
-// _components/AlbumSection.js
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AlbumCard from "./AlbumCard";
-import { getAlbums } from "../_lib/data-service";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { getAlbums } from "../_lib/data-service";
+// import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AlbumSection({ initialAlbums, initialSort }) {
-  const [albums, setAlbums] = useState(initialAlbums);
-  const searchParams = useSearchParams();
-  const sort = searchParams.get("sort") || initialSort;
-
-  useEffect(() => {
-    const fetchAlbums = async () => {
-      const sortedAlbums = await getAlbums(sort);
-      setAlbums(sortedAlbums);
-    };
-
-    fetchAlbums();
-  }, [sort]);
+export default function AlbumSection({ albums }) {
+  // const [albums, setAlbums] = useState(initialAlbums);
+  // const searchParams = useSearchParams();
+  // const sort = searchParams.get("sort") || initialSort;
 
   return (
     <div className="w-full">

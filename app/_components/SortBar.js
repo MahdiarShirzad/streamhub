@@ -1,21 +1,26 @@
+// _components/SortBar.js
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SortBar = ({ totalItems, initialSort, options, items }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sortOption, setSortOption] = useState(initialSort);
-  const searchQuery = searchParams.get("search") || "";
+
+  useEffect(() => {
+    setSortOption(initialSort);
+  }, [initialSort]);
 
   const handleSortChange = (event) => {
-    const newSort = event.target.value;
-    setSortOption(newSort);
-    const query = searchQuery
-      ? `search=${searchQuery}&sort=${newSort}`
-      : `sort=${newSort}`;
-    router.push(`?${query}`);
+    const selectedSort = event.target.value;
+    setSortOption(selectedSort);
+
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", selectedSort);
+
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (

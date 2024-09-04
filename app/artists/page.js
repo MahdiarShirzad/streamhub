@@ -1,6 +1,9 @@
+// page.js
+import { Suspense } from "react";
 import ArtistsSection from "../_components/ArtistsSection";
 import SortBar from "../_components/SortBar";
 import { getArtists } from "../_lib/data-service";
+import Spinner from "../_components/Spinner";
 
 const Page = async ({ searchParams }) => {
   const sort = searchParams.sort || "default";
@@ -25,7 +28,10 @@ const Page = async ({ searchParams }) => {
         options={sortOptions}
         items="artists"
       />
-      <ArtistsSection initialArtists={artists} initialSort={sort} />
+
+      <Suspense fallback={<Spinner />}>
+        <ArtistsSection displayedArtists={artists} sort={sort} />
+      </Suspense>
     </div>
   );
 };

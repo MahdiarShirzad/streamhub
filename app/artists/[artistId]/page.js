@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   getAlbumsByArtist,
   getArtistById,
   getMusicsByArtist,
 } from "../../_lib/data-service";
 import ArtistDetail from "./ArtistDetail";
+import Spinner from "../../_components/Spinner";
 
 export default async function Page({ params }) {
   const { artistId } = params;
@@ -16,12 +17,14 @@ export default async function Page({ params }) {
   const albums = await getAlbumsByArtist(artist.name);
 
   return (
-    <div className=" text-white ">
-      {artist ? (
-        <ArtistDetail artist={artist} musics={musics} albums={albums} />
-      ) : (
-        <p>Artist not found</p>
-      )}
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <div className=" text-white ">
+        {artist ? (
+          <ArtistDetail artist={artist} musics={musics} albums={albums} />
+        ) : (
+          <p>Artist not found</p>
+        )}
+      </div>
+    </Suspense>
   );
 }

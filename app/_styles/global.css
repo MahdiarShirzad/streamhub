@@ -58,3 +58,7 @@ body {
 .top-charts {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
+.rhap_main-controls-button {
+  /* @apply bg-golden; */
+  color: #e2a020 !important;
+}
